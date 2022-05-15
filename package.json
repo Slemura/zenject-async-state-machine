@@ -1,0 +1,26 @@
+{
+  "name": "com.rpdev.modules.custom-state-machine",
+  "displayName": "Zenject custom state machine",
+  "version": "0.0.1",
+  "unity": "2021.1",
+  "unityRelease": "11f1",
+  "description": "Abstract custom state machine",
+  "dependencies": {
+  },
+  "keywords": [
+    "modules",
+    "zenject",
+    "state-machine"
+  ],
+  "type": "module",
+  "author": {
+    "name": "rpdev",
+    "email": "rpugamedev@gmail.com",
+    "url": "https://github.com/Slemura/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Slemura/custom-state-machine",
+    "revision": ""
+  }
+}
