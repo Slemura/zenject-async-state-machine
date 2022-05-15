@@ -7,6 +7,13 @@
   "description": "Abstract custom state machine",
   "dependencies": {
   },
+  "samples": [
+    {
+      "displayName": "Core samples",
+      "description": "Sample state machine usage",
+      "path": "Samples"
+    }
+  ],
   "keywords": [
     "modules",
     "zenject",
