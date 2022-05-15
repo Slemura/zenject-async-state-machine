@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "unity": "2021.1",
   "unityRelease": "11f1",
-  "description": "Async custom state machine in Zenject \n Dependencies: \n  Zenject \n  Unitask" ,
+  "description": "Async custom state machine in Zenject \nDependencies: Zenject,  UniTask" ,
   "dependencies": {
   },
   "samples": [
