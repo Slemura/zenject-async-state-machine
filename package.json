@@ -11,7 +11,7 @@
     {
       "displayName": "Core samples",
       "description": "Sample state machine usage",
-      "path": "Samples"
+      "path": "Samples~/CoreSample"
     }
   ],
   "keywords": [
