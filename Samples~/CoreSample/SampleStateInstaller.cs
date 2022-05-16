@@ -9,20 +9,20 @@ namespace modules.state_machine.sample {
     
         public override void InstallBindings() {
             
-            StateMachineInstaller.Install(Container);
+            AsyncStateMachineInstaller.Install(Container);
             
             Container.Bind<CallCounter>().AsSingle();
 
 
-            Container.SetStateTransition<SampleTriggers.StartGameTrigger>()
+            Container.BindStateTrigger<SampleTriggers.StartGameTrigger>()
                      .ThruState<InitGameState>()
                      .ThruState<InitLibsState>()
                      .ToState<MainMenuState>(StateCreationType.AsCached);
 
-            Container.SetStateTransition<SampleTriggers.MainMenuTrigger>()
+            Container.BindStateTrigger<SampleTriggers.MainMenuTrigger>()
                      .ToState<MainMenuState>();
             
-            Container.SetStateTransition<SampleTriggers.StartLevelTrigger>()
+            Container.BindStateTrigger<SampleTriggers.StartLevelTrigger>()
                      .ThruState<LoadLevelState>()
                      .ToState<GameplayState>();
 

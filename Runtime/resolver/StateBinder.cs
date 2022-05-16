@@ -3,23 +3,28 @@ using System.Collections.Generic;
 using modules.state_machine.core;
 using modules.state_machine.state;
 using modules.state_machine.trigger;
+using Zenject;
 
 namespace modules.state_machine.resolver {
     
-    public class StateBinder<TTrigger> where TTrigger : BaseStateTrigger {
-        
-        private readonly IContextStateMapper                               _context_state_mapper;
-        private readonly IStateFactory                                     _state_factory;
+    public class StateBinder<TTrigger> : IDisposable where TTrigger : BaseStateTrigger {
+
+        private readonly IAsyncStateMachine _state_machine;
+        private readonly IStateFactory        _state_factory;
         
         private readonly List<Func<object, StateCreationType, ITransitionState>> _stack_of_thru_resolvers;
         private readonly List<StateCreationType>                                 _state_creations;
         
         private StateBindInfo _info;
         
-        public StateBinder(IContextStateMapper context_state_mapper, IStateFactory state_factory) {
-            
-            _context_state_mapper    = context_state_mapper;
-            _state_factory           = state_factory;
+        public StateBinder([Inject(Source = InjectSources.Local)]
+                            IAsyncStateMachine state_machine, 
+                            
+                            [Inject(Source = InjectSources.Local)]
+                            IStateFactory state_factory) {
+
+            _state_machine = state_machine;
+            _state_factory = state_factory;
             
             _info                    = new StateBindInfo();
             _stack_of_thru_resolvers = new List<Func<object, StateCreationType, ITransitionState>>();
@@ -41,7 +46,7 @@ namespace modules.state_machine.resolver {
             _info.state_creation_type      = creation_type;
             _info.state_enter_resolve_func = StateGetterResolver<TState>;
             
-            _context_state_mapper.AddStateInfo(_info);
+            _state_machine.AddStateInfo(_info);
         }
 
         private ITransitionState TransitionStateGetterResolver<TState>(object trigger, StateCreationType state_creation_type_type) where TState : ITransitionState<TTrigger>  {
@@ -54,6 +59,12 @@ namespace modules.state_machine.resolver {
             IState<TTrigger> state = _state_factory.Create<TTrigger>(typeof(TState), state_creation_type_type);
             state.SetupTriggerInfo((TTrigger)trigger);
             return state;
+        }
+
+        public void Dispose() {
+            _stack_of_thru_resolvers?.Clear();
+            _state_creations?.Clear();
+            _info = default;
         }
     }
 }
