@@ -1,7 +1,7 @@
 {
   "name": "com.rpdev.modules.custom-state-machine",
   "displayName": "Zenject custom state machine",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "unity": "2021.1",
   "unityRelease": "11f1",
   "description": "Async custom state machine in Zenject \nDependencies: Zenject,  UniTask" ,

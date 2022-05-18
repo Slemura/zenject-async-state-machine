@@ -21,8 +21,9 @@ namespace modules.state_machine.core {
         private readonly Dictionary<Type, StateBindInfo> _states_info = new Dictionary<Type, StateBindInfo>();
         private readonly string                          _guid;
 
-        private          IBaseState                      _current_state;
-        private          ITransitionState                _current_transition_state;
+        private IBaseState       _current_state;
+        private ITransitionState _current_transition_state;
+        private IAbstractState   _prev_state;
 
         private          CancellationTokenSource _cancellation_token;
         private          bool                    _is_disposed;
@@ -58,6 +59,8 @@ namespace modules.state_machine.core {
             _cancellation_token?.Dispose();
             _cancellation_token = new CancellationTokenSource();
             
+            _prev_state         = _current_state;
+            
             if (_current_state != null) {
                 await _current_state.Exit(_cancellation_token.Token);
             }
@@ -65,16 +68,21 @@ namespace modules.state_machine.core {
             if (info.thru_resolve_func != null && info.thru_resolve_func.Count > 0) {
                 for (int i = 0; i < info.thru_resolve_func.Count; i++) {
                     if(_is_disposed) break;
-                    _current_transition_state = info.thru_resolve_func[i].Invoke(trigger, info.thru_state_creations[i]);
+                    
+                    _current_transition_state = info.thru_resolve_func[i].Invoke(trigger, _prev_state?.GetType(), info.thru_state_creations[i]);
+                    
+                    _prev_state = _current_transition_state;
+                    
                     await _current_transition_state.Thru(_cancellation_token.Token);
                 }
             }
             
             if(_is_disposed) return;
-            
-            _current_state = info.state_enter_resolve_func.Invoke(trigger, info.state_creation_type);
+            Debug.LogError($"prev state in main {_prev_state}");
+            _current_state = info.state_enter_resolve_func.Invoke(trigger, _prev_state?.GetType(), info.state_creation_type);
             _current_state.Enter();
             
+            _current_transition_state = null;
             _cancellation_token.Dispose();
         }
 

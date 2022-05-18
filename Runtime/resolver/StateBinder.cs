@@ -12,7 +12,7 @@ namespace modules.state_machine.resolver {
         private readonly IAsyncStateMachine _state_machine;
         private readonly IStateFactory        _state_factory;
         
-        private readonly List<Func<object, StateCreationType, ITransitionState>> _stack_of_thru_resolvers;
+        private readonly List<Func<object, Type, StateCreationType, ITransitionState>> _stack_of_thru_resolvers;
         private readonly List<StateCreationType>                                 _state_creations;
         
         private StateBindInfo _info;
@@ -27,7 +27,7 @@ namespace modules.state_machine.resolver {
             _state_factory = state_factory;
             
             _info                    = new StateBindInfo();
-            _stack_of_thru_resolvers = new List<Func<object, StateCreationType, ITransitionState>>();
+            _stack_of_thru_resolvers = new List<Func<object, Type, StateCreationType, ITransitionState>>();
             _state_creations         = new List<StateCreationType>();
         }
         
@@ -49,15 +49,15 @@ namespace modules.state_machine.resolver {
             _state_machine.AddStateInfo(_info);
         }
 
-        private ITransitionState TransitionStateGetterResolver<TState>(object trigger, StateCreationType state_creation_type_type) where TState : ITransitionState<TTrigger>  {
+        private ITransitionState TransitionStateGetterResolver<TState>(object trigger, Type prev_state, StateCreationType state_creation_type_type) where TState : ITransitionState<TTrigger>  {
             ITransitionState<TTrigger> state = _state_factory.CreateTransition<TTrigger>(typeof(TState), state_creation_type_type);
-            state.SetupTriggerInfo((TTrigger)trigger);
+            state.SetupExternalInfo((TTrigger)trigger, prev_state);
             return state;
         }
         
-        private IState<TTrigger> StateGetterResolver<TState>(object trigger, StateCreationType state_creation_type_type) where TState : IState<TTrigger> {
+        private IState<TTrigger> StateGetterResolver<TState>(object trigger, Type prev_state, StateCreationType state_creation_type_type) where TState : IState<TTrigger> {
             IState<TTrigger> state = _state_factory.Create<TTrigger>(typeof(TState), state_creation_type_type);
-            state.SetupTriggerInfo((TTrigger)trigger);
+            state.SetupExternalInfo((TTrigger)trigger, prev_state);
             return state;
         }
 

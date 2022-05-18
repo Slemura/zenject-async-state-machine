@@ -95,6 +95,6 @@ public class GameOverState : BaseGameState<GameOverTrigger> {
     
     public override void Enter() {
         Debug.LogError($" -- Game over state -- ");
-        GameObject.Destroy(trigger_info.prefab.gameObject);
+        GameObject.Destroy(TriggerInfo.prefab.gameObject);
     }
 }

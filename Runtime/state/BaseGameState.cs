@@ -6,10 +6,14 @@ using modules.state_machine.trigger;
 namespace modules.state_machine.state {
 
     public abstract class BaseTriggerableState<TTrigger> : ITriggerableState<TTrigger> where TTrigger : BaseStateTrigger {
-        protected TTrigger trigger_info;
         
-        public void SetupTriggerInfo(TTrigger trigger) {
-            trigger_info = trigger;
+        protected TTrigger TriggerInfo   { get; private set; }
+        protected Type     PrevStateType { get; private set; }
+        
+        public void SetupExternalInfo(TTrigger trigger, Type previous_state_type) {
+            
+            PrevStateType = previous_state_type;
+            TriggerInfo   = trigger;
         }
     }
 
