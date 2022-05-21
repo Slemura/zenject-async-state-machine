@@ -6,6 +6,8 @@
   "unityRelease": "11f1",
   "description": "Async custom state machine in Zenject \nDependencies: Zenject,  UniTask" ,
   "dependencies": {
+    "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask"
+    
   },
   "samples": [
     {
