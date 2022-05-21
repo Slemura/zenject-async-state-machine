@@ -17,7 +17,7 @@ namespace modules.state_machine.Sample.states {
         }
 
         public override async UniTask Thru(CancellationToken cancellation_token) {
-            Cl.Log($"{_counter.Count} ===InitLibsState===");
+            Cl.Log($"{_counter.Count} ===InitLibsState=== prev state {PrevStateType?.Name}");
             _counter.Increment();
             await UniTask.Delay(TimeSpan.FromSeconds(1), DelayType.Realtime, PlayerLoopTiming.Initialization, cancellation_token);
         }

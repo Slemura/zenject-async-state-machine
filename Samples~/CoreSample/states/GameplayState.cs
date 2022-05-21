@@ -11,7 +11,7 @@ namespace modules.state_machine.Sample.states {
         }
         
         public override void Enter() {
-            Cl.Log($"{_counter.Count} ===GameplayState {trigger_info.level_num}===");
+            Cl.Log($"{_counter.Count} ===GameplayState {TriggerInfo.level_num} prev state {PrevStateType?.Name}===");
             _counter.Increment();
         }
     }

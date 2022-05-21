@@ -1,5 +1,5 @@
 {
-    "name": "sample-def",
+    "name": "com.rpdev.async-state-machine.samples",
     "rootNamespace": "",
     "references": [
         "GUID:00c9752c77e07434da88769cc6c32383",

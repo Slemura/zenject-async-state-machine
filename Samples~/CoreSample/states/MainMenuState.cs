@@ -17,7 +17,7 @@ namespace modules.state_machine.Sample.states {
         }
         
         public override void Enter() {
-            Cl.Log($"{_counter.Count} ===MainMenuState===");
+            Cl.Log($"{_counter.Count} ===MainMenuState=== {PrevStateType?.Name}");
             _counter.Increment();
             _state_dispatcher.StateTrigger(new SampleTriggers.StartLevelTrigger {
                 level_num = 5

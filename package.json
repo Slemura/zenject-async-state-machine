@@ -1,5 +1,5 @@
 {
-  "name": "com.rpdev.modules.custom-state-machine",
+  "name": "com.rpdev.async-state-machine",
   "displayName": "Zenject custom state machine",
   "version": "0.0.3",
   "unity": "2021.1",
