@@ -46,6 +46,7 @@ namespace modules.state_machine.core {
             
             if (_states_info.ContainsKey(trigger_type) == false && _parent_state_machine != null) {
                 _parent_state_machine.EnterStateBeTriggerType(trigger);
+                return;
             }
 
             Assert.That(_states_info.ContainsKey(trigger_type), $"Trigger {trigger_type.Name} type not registered in State machine {_guid}");

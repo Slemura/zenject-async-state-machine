@@ -1,5 +1,5 @@
 {
-    "name": "com.rpdev.async-state-machine",
+    "name": "AsyncStateMachine",
     "rootNamespace": "",
     "references": [
         "Zenject",
