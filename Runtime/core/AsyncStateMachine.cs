@@ -5,7 +5,6 @@ using Cysharp.Threading.Tasks;
 using ModestTree;
 using modules.state_machine.resolver;
 using modules.state_machine.state;
-using UnityEngine;
 using Zenject;
 
 namespace modules.state_machine.core {
@@ -79,7 +78,7 @@ namespace modules.state_machine.core {
             }
             
             if(_is_disposed) return;
-            Debug.LogError($"prev state in main {_prev_state}");
+            
             _current_state = info.state_enter_resolve_func.Invoke(trigger, _prev_state?.GetType(), info.state_creation_type);
             _current_state.Enter();
             
