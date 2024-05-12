@@ -1,18 +1,20 @@
-﻿using modules.state_machine.core;
-using modules.state_machine.Sample;
+﻿using RpDev.AsyncStateMachine.Core;
 using Zenject;
 
-namespace modules.state_machine.sample {
-    public class StubLauncher : IInitializable {
-        
-        private readonly IStateTriggerDispatcher _state_dispatcher;
+namespace RpDev.AsyncStateMachine.Sample
+{
+    public class StubLauncher : IInitializable
+    {
+        private readonly IStateTriggerDispatcher _stateDispatcher;
 
-        public StubLauncher(IStateTriggerDispatcher state_dispatcher) {
-            _state_dispatcher = state_dispatcher;
+        public StubLauncher(IStateTriggerDispatcher stateDispatcher)
+        {
+            _stateDispatcher = stateDispatcher;
         }
 
-        public void Initialize() {
-            _state_dispatcher.StateTrigger<SampleTriggers.StartGameTrigger>();
+        public void Initialize()
+        {
+            _stateDispatcher.StateTrigger<SampleTriggers.StartGameTrigger>();
         }
     }
 }
