@@ -1,9 +1,9 @@
-using modules.state_machine.resolver;
-using modules.state_machine.Sample;
-using modules.state_machine.Sample.states;
+using RpDev.AsyncStateMachine.Installer;
+using RpDev.AsyncStateMachine.Resolver;
+using RpDev.AsyncStateMachine.Sample.States;
 using Zenject;
 
-namespace modules.state_machine.sample {
+namespace RpDev.AsyncStateMachine.Sample {
     
     public class SampleStateInstaller : MonoInstaller {
     

@@ -1,11 +1,12 @@
-﻿namespace modules.state_machine.sample {
-    public class CallCounter {
-        
-        private int _count = 0;
-        public  int Count => _count;
+﻿namespace RpDev.AsyncStateMachine.Sample
+{
+    public class CallCounter
+    {
+        public int Count { get; private set; } = 0;
 
-        public void Increment() {
-            _count++;
+        public void Increment()
+        {
+            Count++;
         }
     }
 }

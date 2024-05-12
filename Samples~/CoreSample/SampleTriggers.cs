@@ -1,14 +1,20 @@
-using modules.state_machine.trigger;
+using RpDev.AsyncStateMachine.Trigger;
 
-namespace modules.state_machine.Sample {
-    public class SampleTriggers {
-    
-        public class MainMenuTrigger : BaseStateTrigger {}
+namespace RpDev.AsyncStateMachine.Sample
+{
+    public class SampleTriggers
+    {
+        public class MainMenuTrigger : BaseStateTrigger
+        {
+        }
 
-        public class StartGameTrigger : MainMenuTrigger {}
+        public class StartGameTrigger : MainMenuTrigger
+        {
+        }
 
-        public class StartLevelTrigger : BaseStateTrigger {
-            public int level_num;
+        public class StartLevelTrigger : BaseStateTrigger
+        {
+            public int LevelNum;
         }
     }
 }

@@ -1,6 +1,6 @@
 {
-    "name": "AsyncStateMachine",
-    "rootNamespace": "",
+    "name": "RpDev.AsyncStateMachine",
+    "rootNamespace": "RpDev.AsyncStateMachine",
     "references": [
         "Zenject",
         "UniTask"
